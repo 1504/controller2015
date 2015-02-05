@@ -37,15 +37,17 @@ void loop() {
     x1Value =  map(analogRead(x1), 415, 605, 420, 610);
     y1Value =  map(analogRead(y1), 584, 442, 610, 420);
     //Some math stuff to get it to -128 to 127
-    y2Value = constrain(map(x2Value, 420, 610, -128, 127), -128, 127);
+    x2Value = constrain(map(x2Value, 420, 610, -128, 127), -128, 127);
     x1Value = constrain(map(x1Value, 420, 610, -128, 127), -128, 127);
     y2Value = constrain(map(y2Value, 420, 610, -128, 127), -128, 127);
     //For reverse
     if (topSwitch == 0){
         y1Value = constrain(map(y1Value, 610, 420, 0, -128), -128, 0);
+        Gamepad.press(1);
     }
     if (topSwitch == 1){
         y1Value = constrain(map(y1Value, 610, 420, 0, 127), 0, 127);
+        Gamepad.release(1);
     }
     //Function that prints joystick info over usb when the reverse button is held.
     printValues(topSwitch);
